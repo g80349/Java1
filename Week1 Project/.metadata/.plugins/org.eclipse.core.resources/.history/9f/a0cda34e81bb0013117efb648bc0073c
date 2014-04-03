@@ -4,6 +4,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
@@ -43,7 +45,6 @@ public class MainActivity extends ActionBarActivity {
     	checkArrays = new CheckBox[] {homework, chores, clean, brush, choice};
     	if (userEdit.getText().toString().equals("")) {
     		choiceText = false;
-    		countNeeded = 4;
     	}else{
     		choiceText = true;
     		countNeeded = 5;
@@ -51,9 +52,6 @@ public class MainActivity extends ActionBarActivity {
     	for (int i = 0; i < checkArrays.length; i++) {
     		if(checkArrays[i].isChecked() == true) {
     			count = count + 1;
-    			if (choice.isChecked() == true) {
-    				countNeeded = 5;
-    			}
     		};
     		if (choiceText == true) {
     			if (count == 5) {
@@ -65,20 +63,26 @@ public class MainActivity extends ActionBarActivity {
     			}
     		}
     	}
-    	if (checked == true) {
-    		finishedText = "Congratulations! You completeted all"+" " + count + " " + "tasks!";
-    	}else{
-    		finishedText = "You still have" + " " + (countNeeded - count) + " " + "tasks left.";
-    	}
-    	finished();
-    }
-    public void finished() {
-    	finishedTextView = (TextView)findViewById(R.id.textView_toDo);
-    	finishedTextView.setText(finishedText);
-    	checked = false;
-    	count = 0;
+    	
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     /**
      * A placeholder fragment containing a simple view.
