@@ -43,7 +43,41 @@ public class MainActivity extends ActionBarActivity {
     	choice = (CheckBox)findViewById(R.id.check_user);
     	userEdit = (EditText)findViewById(R.id.edit_user);
     	checkArrays = new CheckBox[] {homework, chores, clean, brush, choice};
-    	
+    	if (userEdit.getText().toString().equals("")) {
+    		choiceText = false;
+    	}else{
+    		choiceText = true;
+    	}
+    	for (int i = 0; i < checkArrays.length; i++) {
+    		if(checkArrays[i].isChecked() == true) {
+    			count = count + 1;
+    		};
+    		if (choiceText == true) {
+    			if (count == 5) {
+    				checked = true;
+    				countNeeded = 5;
+    			}
+    		}else {
+    			if (count == 4){
+    				checked = true;
+    			}
+    		}
+    	}
+    	if (checked == true) {
+    		finishedText = "Congratulations! You completeted all"+" " + count + " " + "tasks!";
+    	}else{
+    		finishedText = "You still have" + " " + (countNeeded - count) + " " + "tasks left.";
+    		System.out.println(countNeeded);
+    		System.out.println(count);
+    	}
+    	finished();
+    	System.out.println(choiceText);
+    }
+    public void finished() {
+    	finishedTextView = (TextView)findViewById(R.id.textView_toDo);
+    	finishedTextView.setText(finishedText);
+    	checked = false;
+    	count = 0;
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

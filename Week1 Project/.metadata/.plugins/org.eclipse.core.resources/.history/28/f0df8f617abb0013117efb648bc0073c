@@ -9,18 +9,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.TextView;
 
 public class MainActivity extends ActionBarActivity {
 	CheckBox homework, chores, clean, brush, choice;
 	TextView finishedTextView;
 	int count;
-	int countNeeded = 4;
-	boolean checked = false;
-	boolean choiceText = false;
+	boolean checked;
 	String finishedText;
-	EditText userEdit;
 	private CheckBox[] checkArrays;
 	
     @Override
@@ -41,9 +37,27 @@ public class MainActivity extends ActionBarActivity {
     	clean = (CheckBox)findViewById(R.id.check_cleanRoom);
     	brush = (CheckBox)findViewById(R.id.check_brushTeeth);
     	choice = (CheckBox)findViewById(R.id.check_user);
-    	userEdit = (EditText)findViewById(R.id.edit_user);
-    	checkArrays = new CheckBox[] {homework, chores, clean, brush, choice};
-    	
+    	checkArrays = new CheckBox[] {homework,chores,clean,brush, choice};
+    	for (int i = 0; i < checkArrays.length; i++) {
+    		if(checkArrays[i].isChecked() == true) {
+    			count = count + 1;
+    		};
+    		if (count >= 4) {
+    			checked = true;
+    		}
+    	}
+    	if (checked == true) {
+    		finishedText = "Congratulations! You completeted all"+" " + count + " " + "tasks!";
+    	}else{
+    		finishedText = "You still have" + " " + (5 - count) + " " + "tasks left.";
+    		count = 0;
+    	}
+    	finished();
+    	System.out.println(finishedText);
+    }
+    public void finished() {
+    	finishedTextView = (TextView)findViewById(R.id.textView_toDo);
+    	finishedTextView.setText(finishedText);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

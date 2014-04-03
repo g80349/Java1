@@ -1,6 +1,7 @@
 package com.example.todolist;
 
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,20 +9,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.TextView;
+import android.os.Build;
 
 public class MainActivity extends ActionBarActivity {
-	CheckBox homework, chores, clean, brush, choice;
-	TextView finishedTextView;
+
 	int count;
-	int countNeeded = 4;
-	boolean checked = false;
-	boolean choiceText = false;
+	boolean isChecked;
 	String finishedText;
-	EditText userEdit;
-	private CheckBox[] checkArrays;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,15 +30,9 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void onClick(View view) {
-    	homework = (CheckBox)findViewById(R.id.check_homework);
-    	chores = (CheckBox)findViewById(R.id.check_chores);
-    	clean = (CheckBox)findViewById(R.id.check_cleanRoom);
-    	brush = (CheckBox)findViewById(R.id.check_brushTeeth);
-    	choice = (CheckBox)findViewById(R.id.check_user);
-    	userEdit = (EditText)findViewById(R.id.edit_user);
-    	checkArrays = new CheckBox[] {homework, chores, clean, brush, choice};
     	
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         
