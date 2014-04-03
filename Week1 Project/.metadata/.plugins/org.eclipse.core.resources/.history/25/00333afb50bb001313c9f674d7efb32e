@@ -1,0 +1,50 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:textAlignment="center"
+    tools:context="com.example.todolist.MainActivity$PlaceholderFragment" >
+
+    <CheckBox
+        android:id="@+id/check_homework"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/check_homework" />
+
+    <CheckBox
+        android:id="@+id/check_chores"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/check_chores" />
+
+    <CheckBox
+        android:id="@+id/check_cleanRoom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/check_cleanRoom" />
+
+    <CheckBox
+        android:id="@+id/check_brushTeeth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/check_brushTeeth" />
+
+    <TextView
+        android:id="@+id/textView_toDo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/textView_toDo" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="148dp"
+        android:layout_height="wrap_content"
+        android:text="Button" />
+
+</LinearLayout>

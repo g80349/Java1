@@ -13,6 +13,10 @@ import android.os.Build;
 
 public class MainActivity extends ActionBarActivity {
 
+	int count;
+	boolean isChecked;
+	String finishedText;
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +29,9 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
+    public void onClick(View view) {
+    	
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
