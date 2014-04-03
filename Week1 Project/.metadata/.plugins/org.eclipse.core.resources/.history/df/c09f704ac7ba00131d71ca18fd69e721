@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <string name="app_name">Metric Converter</string>
-    <string name="standard">Standard measurment</string>
-    <int name="standard_number">10</string>
-    <string name="action_settings">Settings</string>
-
-</resources>
