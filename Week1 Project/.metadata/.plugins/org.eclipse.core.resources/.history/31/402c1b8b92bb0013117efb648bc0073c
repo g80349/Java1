@@ -83,18 +83,23 @@ public class MainActivity extends ActionBarActivity {
     	userEdit.setText("");
     		if (homework.isChecked() == true) {
     			homework.performClick();
+    			System.out.println(homework);
     		}
     		if (chores.isChecked() == true) {
-    			chores.performClick();
+    			homework.performClick();
+    			System.out.println(homework);
     		}
     		if (clean.isChecked() == true) {
-    			clean.performClick();
+    			homework.performClick();
+    			System.out.println(homework);
     		}
     		if (brush.isChecked() == true) {
-    			brush.performClick();
+    			homework.performClick();
+    			System.out.println(homework);
     		}
     		if (choice.isChecked() == true) {
-    			choice.performClick();
+    			homework.performClick();
+    			System.out.println(homework);
     		}
     	
     	finishedText = "Completed all tasks? Press Finished.";

@@ -81,20 +81,12 @@ public class MainActivity extends ActionBarActivity {
     	choice = (CheckBox)findViewById(R.id.check_user);
     	userEdit = (EditText)findViewById(R.id.edit_user);
     	userEdit.setText("");
+    	//for (int i = 0; i < checkArrays.length; i++) {
+    		//System.out.println(checkArrays[0]);
+    	//}
     		if (homework.isChecked() == true) {
     			homework.performClick();
-    		}
-    		if (chores.isChecked() == true) {
-    			chores.performClick();
-    		}
-    		if (clean.isChecked() == true) {
-    			clean.performClick();
-    		}
-    		if (brush.isChecked() == true) {
-    			brush.performClick();
-    		}
-    		if (choice.isChecked() == true) {
-    			choice.performClick();
+    			System.out.println(homework);
     		}
     	
     	finishedText = "Completed all tasks? Press Finished.";

@@ -9,7 +9,6 @@
     <string name="check_user"></string>
     <string name="edit_user"></string>
     <string name="button_finish">Finished</string>
-    <string name="button_clear">Clear</string>
-    <string name="textView_toDo">Completed all tasks? Press Finished.</string>
+    <string name="textView_toDo">Completed all tasks? Press Finished</string>
 
 </resources>
