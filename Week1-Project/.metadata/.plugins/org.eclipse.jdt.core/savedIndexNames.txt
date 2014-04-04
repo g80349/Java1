@@ -1,0 +1,6 @@
+INDEX VERSION 1.126+/Users/davidwhimple/Desktop/Java1/Week1-Project/.metadata/.plugins/org.eclipse.jdt.core
+1803204951.index
+2926837468.index
+1573304368.index
+1270315800.index
+691013536.index
