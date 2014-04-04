@@ -63,12 +63,13 @@ public class MainActivity extends ActionBarActivity {
     				countNeeded = 5;
     			}
     		};
-
+<<<<<<< HEAD
     		
     		//if there is a check or text in the user editable check box
     		//and text view and the number of boxes checked is correct the
     		//set bool to true
-
+=======
+>>>>>>> master
     		if (choiceText == true || choice.isChecked() == true) {
     			if (count == 5) {
     				checked = true;  				
