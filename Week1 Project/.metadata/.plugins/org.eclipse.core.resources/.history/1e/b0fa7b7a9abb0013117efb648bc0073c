@@ -11,7 +11,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 public class MainActivity extends ActionBarActivity {
-	//Create variables needed
 	CheckBox homework, chores, clean, brush, choice;
 	TextView finishedTextView;
 	int count;
@@ -35,7 +34,6 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void onClick(View view) {
-    	//get elements by their ids
     	homework = (CheckBox)findViewById(R.id.check_homework);
     	chores = (CheckBox)findViewById(R.id.check_chores);
     	clean = (CheckBox)findViewById(R.id.check_cleanRoom);
@@ -43,8 +41,6 @@ public class MainActivity extends ActionBarActivity {
     	choice = (CheckBox)findViewById(R.id.check_user);
     	userEdit = (EditText)findViewById(R.id.edit_user);
     	checkArrays = new CheckBox[] {homework, chores, clean, brush, choice};
-    	
-    	//if the edit view has text then change the integer needed to complete the list 
     	if (userEdit.getText().toString().equals("")) {
     		choiceText = false;
     		countNeeded = 4;
@@ -52,50 +48,32 @@ public class MainActivity extends ActionBarActivity {
     		choiceText = true;
     		countNeeded = 5;
     	}
-    	
-    	//loop to count how many check boxes are checked
     	for (int i = 0; i < checkArrays.length; i++) {
     		if(checkArrays[i].isChecked() == true) {
     			count = count + 1;
-    			
-    			//if the edit view is checked change amount needed to complete list
     			if (choice.isChecked() == true) {
     				countNeeded = 5;
     			}
     		};
-    		
-    		//if there is a check or text in the user editable check box
-    		//and text view and the number of boxes checked is correct the
-    		//set bool to true
     		if (choiceText == true || choice.isChecked() == true) {
     			if (count == 5) {
     				checked = true;  				
     			}
-    		//if edit view not used and the count is 4 then set bool to true
     		}else {
     			if (count == 4){
     				checked = true;
     			}
     		}
     	}
-    	
-    	//if all boxes are checked change padding of text view and set text
     	if (checked == true) {
-    		finishedTextView = (TextView)findViewById(R.id.textView_toDo);
     		finishedTextView.setPadding(0,0,0,0);
     		finishedText = "Congratulations! You completeted all"+" " + count + " " + "tasks!";
     	}else{
-    		
-    	//if all boxes are not checked change padding of text view and set text
-    		finishedTextView = (TextView)findViewById(R.id.textView_toDo);
-    		finishedTextView.setPadding(125,0,0,0);
     		finishedText = "You still have" + " " + (countNeeded - count) + " " + "tasks left.";
     	}
-    	//run finished function
     	finished();
     }
     
-    //clear button and elements from ids
     public void onClear(View view) {
     	homework = (CheckBox)findViewById(R.id.check_homework);
     	chores = (CheckBox)findViewById(R.id.check_chores);
@@ -103,12 +81,7 @@ public class MainActivity extends ActionBarActivity {
     	brush = (CheckBox)findViewById(R.id.check_brushTeeth);
     	choice = (CheckBox)findViewById(R.id.check_user);
     	userEdit = (EditText)findViewById(R.id.edit_user);
-    	
-    	//clear edit view
     	userEdit.setText("");
-    	
-    	//series of if statements to see if boxes are checked. if they 
-    	//are the click them off
     		if (homework.isChecked() == true) {
     			homework.performClick();
     		}
@@ -125,15 +98,12 @@ public class MainActivity extends ActionBarActivity {
     			choice.performClick();
     		}
     	
-    	//change text view text and padding
-    	finishedTextView = (TextView)findViewById(R.id.textView_toDo);
     	finishedTextView.setPadding(0,0,0,0);
     	finishedText = "Completed all tasks? Press Finished.";
+    	finishedTextView = (TextView)findViewById(R.id.textView_toDo);
     	finishedTextView.setText(finishedText);
     }
     
-    //finished function that sets text to text view and resets the count
-    //and the bool for the check boxes
     public void finished() {
     	finishedTextView = (TextView)findViewById(R.id.textView_toDo);
     	finishedTextView.setText(finishedText);
