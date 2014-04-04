@@ -55,7 +55,7 @@ public class MainActivity extends ActionBarActivity {
     				countNeeded = 5;
     			}
     		};
-    		if (choiceText == true || choice.isChecked() == true) {
+    		if (choiceText == true) {
     			if (count == 5) {
     				checked = true;  				
     			}
