@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Weather</string>
+    <string name="forecast_text">Please select the location, then press the forecast button.</string>
+    <string-array name = "location_array">
+        <item>Las_Vegas</item>
+        <item>Henderson</item>
+        <item>North_Las_Vegas</item>
+        <item>Stateline</item>
+    </string-array>
+    <string name="enter_button">Get Forecast</string>
+
+</resources>
