@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Weather</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string-array name = "location_array">
+        <item>Las Vegas</item>
+        <item>Henderson</item>
+        <item>North Las Vegas</item>
+        <item>Stateline</item>
+    </string-array>
+    <string name="enter_button">Get Forecast</string>
+
+</resources>

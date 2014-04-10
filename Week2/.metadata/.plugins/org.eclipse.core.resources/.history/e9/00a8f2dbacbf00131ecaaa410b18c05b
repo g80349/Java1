@@ -1,0 +1,27 @@
+package com.example.weather;
+
+
+import android.support.v7.app.ActionBarActivity;
+import android.view.View;
+import android.widget.Spinner;
+import android.os.Bundle;
+
+
+public class MainActivity extends ActionBarActivity {
+	
+	Spinner spinnerLoc;
+	
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);        
+    }
+
+    public void onClick(View view){
+    	spinnerLoc = (Spinner) findViewById(R.id.location);
+    	String selectedLocation = spinnerLoc.getSelectedItem().toString();
+    	System.out.println("STRING =" + selectedLocation);
+    	
+    }
+
+}
