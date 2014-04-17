@@ -1,0 +1,82 @@
+package com.whimple.library;
+
+import com.example.weather.MainActivity;
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.AsyncTask;
+
+public class connection {
+
+	public static boolean checkConnection(Context context) {
+		// check for internet connection
+		ConnectivityManager cManager = (ConnectivityManager) context
+				.getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo nInfo = cManager.getActiveNetworkInfo();
+		String cType = "Unavailable";
+		boolean connect = false;
+		if (nInfo != null) {
+			if (nInfo.isConnected()) {
+				connect = true;
+				cType = nInfo.getTypeName();
+				System.out.println(cType);
+			}
+		}
+
+		return connect;
+
+	}
+
+	public static String getResponse(URL url) {
+
+		String content = "";
+
+		try {
+			url = new URL(MainActivity.cityString);
+			URLConnection urlConnect = url.openConnection();
+			BufferedInputStream buffInput = new BufferedInputStream(
+					urlConnect.getInputStream());
+
+			byte[] contentBytes = new byte[1024];
+			int bytesRead = 0;
+			StringBuffer contentBuff = new StringBuffer();
+
+			while ((bytesRead = buffInput.read(contentBytes)) != -1) {
+				content = new String(contentBytes, 0, bytesRead);
+				contentBuff.append(content);
+			}
+			content = contentBuff.toString();
+		} catch (IOException e) {
+			content = "Something went wrong in getResponse.";
+		}
+
+		return content;
+
+	}
+
+	// gets json 
+	public static class getData extends AsyncTask<String, Void, String> {
+		@Override
+		protected String doInBackground(String... arg0) {
+			String respString = "";
+			try {
+				URL url = new URL(MainActivity.cityString);
+				respString = getResponse(url);
+			} catch (MalformedURLException e) {
+				respString = "Something went wrong in getData.";
+			}
+
+			return respString;
+		}
+
+		protected void onPostExecute(String result) {
+			super.onPostExecute(result);
+		}
+	}
+}

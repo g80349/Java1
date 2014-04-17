@@ -1,6 +1,0 @@
-package com.example.weather;
-
-public enum Enum {
-			Vegas(86, 61);
-}
-

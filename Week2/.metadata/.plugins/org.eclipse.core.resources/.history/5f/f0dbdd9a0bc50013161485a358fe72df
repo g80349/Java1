@@ -1,0 +1,87 @@
+package com.whimple.library;
+
+import com.example.weather.MainActivity;
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.AsyncTask;
+
+public class connection {
+	
+	
+	
+	public static boolean checkConnection(Context context) {
+		
+		ConnectivityManager cm = (ConnectivityManager) context
+				.getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo ni = cm.getActiveNetworkInfo();
+		String connectionType = "Unavailable";
+		boolean conn = false;
+		if (ni != null) {
+			if (ni.isConnected()) {
+				conn = true;
+				connectionType = ni.getTypeName();
+				System.out.println(connectionType);
+			}
+		}
+
+		return conn;
+
+	}
+	
+	public static String getResponse(URL url){
+		
+		
+			String content = "";
+			
+			try {
+				url = new URL(MainActivity.cityString);
+				URLConnection conn = url.openConnection();
+				BufferedInputStream bin = new BufferedInputStream(conn.getInputStream());
+
+				byte[] contentBytes = new byte[1024];
+				int bytesRead = 0;
+				StringBuffer contentBuffer = new StringBuffer();
+
+				while( (bytesRead = bin.read(contentBytes)) != -1){
+				content = new String(contentBytes,0,bytesRead);
+				contentBuffer.append(content);
+				}
+				content = contentBuffer.toString();
+			} catch (IOException e) {
+				content = "Something went wrong in getResponse.";
+			}
+		
+		return content;
+		
+	}
+	
+	public static class getData extends AsyncTask<String, Void, String>{
+
+		@Override
+		protected String doInBackground(String... arg0) {
+			String responseString = "";
+			try {
+				URL url = new URL(MainActivity.cityString);
+				responseString = getResponse(url);
+			} catch (MalformedURLException e) {
+				responseString = "Something went wrong in getData.";
+			}
+			
+			return responseString;
+		}
+		protected void onPostExecute(String result){
+			if (!(result == null)){
+				super.onPostExecute(result);
+			}else{
+				System.out.println(result);
+			}
+		}
+	}
+}

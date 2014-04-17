@@ -1,0 +1,167 @@
+package com.example.weather;
+
+import java.text.NumberFormat;
+import java.text.ParsePosition;
+
+import com.whimple.library.JSON;
+import com.whimple.library.connection;
+
+import android.support.v7.app.ActionBarActivity;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.os.Bundle;
+
+public class MainActivity extends ActionBarActivity {
+
+	// variables
+	static String TAG = "NETWORK DATA - MAIN ACTIVITY";
+	Spinner spinnerCity;
+	String[] cityList;
+	Spinner spinnerState;
+	String[] stateList;
+	Spinner spinnerMeasure;
+	String[] measurementList;
+	String selectedMeasurement;
+	public static Context context;
+	EditText cityEditText;
+	String cityText;
+	public static String cityString = "";
+	public static TextView text;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+		text = (TextView) findViewById(R.id.forecast);
+		context = this;
+		if (connection.checkConnection(context)) {
+			System.out.println("You have a connection!");
+
+		} else {
+			
+			newAlertView("You do not have an internet connection. Please connect and try again.");
+		}
+
+		// get state spinner list and item on spinner that is selected
+		stateList = getResources().getStringArray(R.array.state_array);
+		spinnerState = (Spinner) findViewById(R.id.state);
+		spinnerState.setOnItemSelectedListener(new OnItemSelectedListener() {
+			public void onItemSelected(AdapterView<?> parent, View view,
+					int position, long id) {
+				// text for toast from selected spinner item
+				Toast.makeText(spinnerState.getContext(),
+						"You have selected " + stateList[position],
+						Toast.LENGTH_LONG).show();
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+
+		// get measurement spinner list and item on spinner that is selected
+		measurementList = getResources().getStringArray(
+				R.array.measurement_array);
+		spinnerMeasure = (Spinner) findViewById(R.id.measurement);
+		spinnerMeasure.setOnItemSelectedListener(new OnItemSelectedListener() {
+			public void onItemSelected(AdapterView<?> parent, View view,
+					int position, long id) {
+				// text for toast from selected spinner item
+				Toast.makeText(spinnerMeasure.getContext(),
+						"You have selected " + measurementList[position],
+						Toast.LENGTH_LONG).show();
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+	};
+
+	public static void newAlertView(String message) {
+		AlertDialog.Builder builder = new AlertDialog.Builder(context);
+		builder.setTitle("Error")
+				.setMessage(message)
+				.setCancelable(false)
+				.setNegativeButton("Close",
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int id) {
+								dialog.cancel();
+							}
+						});
+		AlertDialog alert = builder.create();
+		alert.show();
+	}
+
+	public void onClick(View view) {
+
+		if (connection.checkConnection(context)) {
+			System.out.println("You have a connection!");
+
+			// get the city edit view and get the text
+			cityEditText = (EditText) findViewById(R.id.edit_city);
+			cityText = cityEditText.getText().toString();
+			// check if city text is numbers
+			NumberFormat formatter = NumberFormat.getInstance();
+			ParsePosition pos = new ParsePosition(0);
+			formatter.parse(cityText, pos);
+			System.out.println(cityText);
+
+			if (cityText.equals("")) {
+				newAlertView("Please enter a city or zip.");
+			} else {
+				// put underscores where spaces are because of api's url
+				// structure
+				String underscoreString = cityText.replaceAll(" ", "_");
+				// get the selected state spinner
+				String selectedState = spinnerState.getSelectedItem()
+						.toString();
+				TextView results = (TextView) findViewById(R.id.forecast);
+				cityString = "http://api.wunderground.com/api/0daa58d9b0337d04/conditions/q/"
+						+ selectedState + "/" + underscoreString + ".json";
+				// get the selected measurement spinner name and put both
+				// spinner
+				// selections in the read JSON method
+				selectedMeasurement = spinnerMeasure.getSelectedItem()
+						.toString();
+				if (selectedState.equals("Zip Code")){
+					cityString = "http://api.wunderground.com/api/0daa58d9b0337d04/conditions/q/" + underscoreString + ".json";
+				}
+				// pass new cityString url and temp measurement into JSON
+				System.out.println(selectedState);
+				if (pos.getIndex() == 5 && !selectedState.equals("Zip Code")) {
+					newAlertView("Please change selection to zip code or enter a valid city.");
+				} else if (selectedState.equals("Select State or Zip Code")){
+					newAlertView("Please select a state or zip code.");
+				} else if (pos.getIndex() > 6
+						&& selectedState.equals("Zip Code")) {
+					newAlertView("Please enter valid zip code.");
+				} else if (!cityText.equals("")
+						&& selectedState.equals("Zip Code") && pos.getIndex() == 0) {
+					newAlertView("Please select a state or enter a valid zip code.");
+				} else {
+					System.out.println(cityString);
+					results.setText(JSON.readJSON(cityString,
+							selectedMeasurement));
+				}
+			}
+		} else {
+
+			newAlertView("You do not have and internet connection. Please connect and try again.");
+		}
+		
+	}
+
+}
