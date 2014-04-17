@@ -1,6 +1,5 @@
 package com.example.weather;
 
-//David Whimple Java 1 Week 3 1404
 import java.text.NumberFormat;
 import java.text.ParsePosition;
 

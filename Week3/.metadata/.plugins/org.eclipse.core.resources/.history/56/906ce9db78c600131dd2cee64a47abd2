@@ -1,5 +1,4 @@
 package com.whimple.library;
-
 //David Whimple Java 1 Week 3 1404
 import com.example.weather.MainActivity;
 import java.io.BufferedInputStream;

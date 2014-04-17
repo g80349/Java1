@@ -1,6 +1,5 @@
 package com.whimple.library;
 
-//David Whimple Java 1 Week 3 1404
 import java.util.concurrent.ExecutionException;
 
 import com.example.weather.MainActivity;
